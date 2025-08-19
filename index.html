@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anglo-Carib Shipping Ltd - Your Trusted Logistics Partner into the Caribbean</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F5F4; /* Warm Stone background */
+            color: #374151; /* Darker Gray text */
+        }
+        .font-display { font-family: 'Teko', sans-serif; }
+        .text-nautical { color: #003366; } /* Nautical Blue */
+
+        .bg-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1611689102227-0c237c9e6c3e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+        }
+        .bg-header-image {
+            background-image: linear-gradient(rgba(243, 244, 246, 0.3), rgba(243, 244, 246, 0.3)), url('https://images.unsplash.com/photo-1549465220-1a92b77a7b80?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+        }
+        .nav-link.active {
+            color: #0d9488; /* Deep Teal */
+            font-weight: 600;
+        }
+        .btn-primary {
+            background-color: #0d9488; /* Deep Teal */
+            color: #FFFFFF;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #0f766e; /* Darker Teal */
+        }
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid #FFFFFF;
+            color: #FFFFFF;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #FFFFFF;
+            color: #0d9488;
+        }
+        .step-form { display: none; }
+        .step-form.active { display: block; }
+        .step-indicator { background-color: #D1D5DB; transition: background-color 0.3s ease; }
+        .step-indicator.active { background-color: #0d9488; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 450px;
+            max-height: 60vh;
+        }
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #0d9488;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header id="header" class="bg-header-image backdrop-blur-sm shadow-sm fixed top-0 left-0 right-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="#home" class="flex items-center space-x-2">
+                    <span class="text-3xl text-white">🛡️</span> <span class="text-3xl text-nautical font-display tracking-wider">ACS</span>
+                    <span class="hidden sm:block text-xl font-semibold text-gray-700">Anglo-Carib Shipping</span>
+                </a>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#services" class="nav-link text-gray-700 hover:text-teal-600 transition duration-300">Services</a>
+                    <a href="#process" class="nav-link text-gray-700 hover:text-teal-600 transition duration-300">Process</a>
+                    <a href="#compare" class="nav-link text-gray-700 hover:text-teal-600 transition duration-300">Compare</a>
+                    <a href="#about" class="nav-link text-gray-700 hover:text-teal-600 transition duration-300">About</a>
+                    <a href="#contact" class="nav-link text-gray-700 hover:text-teal-600 transition duration-300">Contact</a>
+                </nav>
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#quote" class="btn-primary font-semibold px-5 py-2.5 rounded-lg">Get a Quote</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-gray-700">
+                    <span class="text-3xl">☰</span>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-4 border-t border-gray-200">
+            <a href="#services" class="block text-center py-2 text-gray-600 hover:text-teal-600">Services</a>
+            <a href="#process" class="block text-center py-2 text-gray-600 hover:text-teal-600">Process</a>
+            <a href="#compare" class="block text-center py-2 text-gray-600 hover:text-teal-600">Compare</a>
+            <a href="#about" class="block text-center py-2 text-gray-600 hover:text-teal-600">About Us</a>
+            <a href="#contact" class="block text-center py-2 text-gray-600 hover:text-teal-600">Contact</a>
+            <div class="mt-4 px-6">
+                <a href="#quote" class="block w-full text-center btn-primary font-semibold px-4 py-3 rounded-lg">Get a Free Quote</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="bg-hero text-white pt-32 pb-24 md:pt-48 md:pb-40">
+            <div class="container mx-auto text-center px-4">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 reveal-on-scroll">Your Bridge to the Caribbean</h1>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 reveal-on-scroll" style="transition-delay: 150ms;">Personalized, reliable, and transparent Sea &amp; Air Freight solutions from worldwide origins. We handle your logistics with the care and expertise your shipment deserves.</p>
+                <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 reveal-on-scroll">
+                    <a href="#quote" class="w-full sm:w-auto btn-primary font-bold px-8 py-4 rounded-lg text-lg">Request a Quote</a>
+                    <a href="#track" class="w-full sm:w-auto btn-secondary font-bold px-8 py-4 rounded-lg text-lg">Track Shipment</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="differentiators" class="py-20 md:py-24 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">The Anglo-Carib Advantage</h2>
+                    <p class="text-gray-600 mt-4 text-lg">This section introduces the core principles that set us apart. We've built our company around three pillars: unwavering reliability, deep specialization in the Caribbean corridor, and a genuinely personal approach to service. Explore how these values translate into a seamless shipping experience for you.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-10 text-center">
+                    <div class="p-6 reveal-on-scroll">
+                        <div class="text-teal-500 text-5xl mb-4">🛡️</div>
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">Unwavering Reliability</h3>
+                        <p class="text-gray-600">As a new, owner-operated entity, our reputation is everything. We are founded on a commitment to transparency and dependable service, backed by over 30 years of industry experience.</p>
+                    </div>
+                    <div class="p-6 reveal-on-scroll" style="transition-delay: 150ms;">
+                        <div class="text-teal-500 text-5xl mb-4">🌎</div>
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">Caribbean Specialization</h3>
+                        <p class="text-gray-600">Our services are expertly tailored for the worldwide-to-Caribbean shipping corridor, ensuring expert knowledge of routes and customs for both Sea and Air Freight.</p>
+                    </div>
+                    <div class="p-6 reveal-on-scroll" style="transition-delay: 300ms;">
+                        <div class="text-teal-500 text-5xl mb-4">🤝</div>
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">Genuinely Personal Service</h3>
+                        <p class="text-gray-600">We offer a completely personalized end-to-end service, a unique promise in the UK shipping sector. From first quote to final delivery, you'll receive exceptional, dedicated care.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="py-20 md:py-24 bg-stone-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Our Core Shipping Services</h2>
+                    <p class="text-gray-600 mt-4 text-lg">This section details the range of logistics solutions we offer. Whether you're a business shipping commercial goods or an individual moving personal effects, we have a service designed for your needs. Click on any card to reveal more information about how we can help.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="service-card bg-white p-6 rounded-lg shadow-md cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal-on-scroll">
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">Commercial Cargo</h3>
+                        <p class="text-gray-600">Sea &amp; Air Freight solutions for businesses shipping inventory, equipment, and goods from anywhere in the world to Caribbean destinations.</p>
+                        <div class="service-details hidden mt-4 text-gray-600">
+                            <p class="border-t pt-4 mt-4 border-gray-200">We handle diverse commercial needs via Sea and Air, offering LCL, FCL, and air cargo consolidation. Our services cover all major ports and airports in the Caribbean, with full support for customs documentation.</p>
+                        </div>
+                    </div>
+                    <div class="service-card bg-white p-6 rounded-lg shadow-md cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal-on-scroll" style="transition-delay: 100ms;">
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">Vehicle Shipping</h3>
+                        <p class="text-gray-600">Securely transport your cars, motorcycles, and vans from worldwide origins to various Caribbean ports via Sea Freight.</p>
+                        <div class="service-details hidden mt-4 text-gray-600">
+                             <p class="border-t pt-4 mt-4 border-gray-200">We manage all logistics for Roll-on/Roll-off (RoRo) and containerized vehicle shipping. Our team will guide you through all necessary documentation and customs procedures.</p>
+                        </div>
+                    </div>
+                    <div class="service-card bg-white p-6 rounded-lg shadow-md cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal-on-scroll" style="transition-delay: 200ms;">
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">Container Shipping</h3>
+                        <p class="text-gray-600">Full (FCL) and Less-than-Container Load (LCL) options for larger household moves or commercial cargo from worldwide origins.</p>
+                        <div class="service-details hidden mt-4 text-gray-600">
+                            <p class="border-t pt-4 mt-4 border-gray-200">Choose from 20ft or 40ft containers for exclusive use, or share container space with our economical LCL service for smaller, bulkier shipments originating globally.</p>
+                        </div>
+                    </div>
+                    <div class="service-card bg-white p-6 rounded-lg shadow-md cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal-on-scroll" style="transition-delay: 300ms;">
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">Boxes &amp; Crates</h3>
+                        <p class="text-gray-600">Ideal for personal effects or business items that don't require a full container, available via Sea or Air Freight to the Caribbean.</p>
+                        <div class="service-details hidden mt-4 text-gray-600">
+                           <p class="border-t pt-4 mt-4 border-gray-200">We provide competitive pricing for shipping boxes, crates, and pallets. This service is perfect for students, small businesses, or anyone sending smaller consignments.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="process" class="py-20 md:py-24 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Our Streamlined Process</h2>
+                    <p class="text-gray-600 mt-4 text-lg">To demystify international shipping, we've refined our global process into three transparent steps. This visual timeline walks you through the journey of your shipment, from initial contact to final delivery, ensuring you know what to expect at every stage.</p>
+                </div>
+                <div class="relative max-w-2xl mx-auto">
+                    <div class="absolute left-9 h-full border-l-2 border-dashed border-gray-300 md:left-1/2"></div>
+                    <div class="space-y-16">
+                        <div class="relative reveal-on-scroll">
+                            <div class="md:flex items-center">
+                                <div class="md:w-1/2 md:pr-8">
+                                    <div class="p-6 bg-stone-50 rounded-lg shadow-md">
+                                        <h3 class="text-xl font-bold mb-2 text-teal-700">Step 1: Get Your Quote</h3>
+                                        <p class="text-gray-600">Fill out our simple online form with your shipment details, including origin and destination. We'll promptly provide a clear, no-obligation quote for Sea or Air Freight.</p>
+                                    </div>
+                                </div>
+                                <div class="md:w-1/2 md:pl-8"></div>
+                            </div>
+                            <div class="absolute left-9 top-1/2 -translate-y-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-teal-500 border-4 border-white md:left-1/2"></div>
+                        </div>
+                        <div class="relative reveal-on-scroll">
+                            <div class="md:flex items-center">
+                                <div class="md:w-1/2 md:pr-8 md:text-right hidden md:block"></div>
+                                <div class="md:w-1/2 md:pl-8">
+                                    <div class="p-6 bg-stone-50 rounded-lg shadow-md">
+                                        <h3 class="text-xl font-bold mb-2 text-teal-700">Step 2: Arrange Collection</h3>
+                                        <p class="text-gray-600">Once you approve the quote, we'll coordinate collection from your worldwide address or guide you for drop-off at a designated partner depot. We handle the paperwork.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="absolute left-9 top-1/2 -translate-y-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-teal-500 border-4 border-white md:left-1/2"></div>
+                        </div>
+                         <div class="relative reveal-on-scroll">
+                            <div class="md:flex items-center">
+                                <div class="md:w-1/2 md:pr-8">
+                                    <div class="p-6 bg-stone-50 rounded-lg shadow-md">
+                                        <h3 class="text-xl font-bold mb-2 text-teal-700">Step 3: Track &amp; Receive</h3>
+                                        <p class="text-gray-600">We ship your goods and provide a tracking number. Monitor your shipment's progress online until it's ready for collection at the destination port or airport in the Caribbean.</p>
+                                    </div>
+                                </div>
+                                <div class="md:w-1/2 md:pl-8"></div>
+                            </div>
+                            <div class="absolute left-9 top-1/2 -translate-y-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-teal-500 border-4 border-white md:left-1/2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="compare" class="py-20 md:py-24 bg-stone-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">How We Compare</h2>
+                    <p class="text-gray-600 mt-4 text-lg">This chart provides a clear, data-driven comparison of our service features against the market. We believe in transparency, and this visualization demonstrates our commitment to offering a more comprehensive and supportive shipping experience than typical providers.</p>
+                </div>
+                <div class="bg-white p-6 sm:p-8 rounded-lg shadow-xl reveal-on-scroll">
+                    <div class="chart-container">
+                        <canvas id="marketComparisonChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="quote" class="py-20 md:py-24 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                 <div class="max-w-3xl mx-auto bg-stone-50 p-6 sm:p-10 rounded-lg shadow-2xl reveal-on-scroll">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold text-gray-800">Request a Free Shipping Quote</h2>
+                        <p class="text-gray-600 mt-2">This interactive form is the first step towards your seamless shipping solution. Complete the three simple stages, and our team will promptly return a detailed, competitive quote tailored to your specific needs.</p>
+                    </div>
+                    <div id="quote-form-container">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="w-1/3 text-center">
+                                <div class="step-indicator active w-8 h-8 mx-auto rounded-full flex items-center justify-center text-white font-bold">1</div>
+                                <p class="text-sm mt-2 text-gray-700 font-medium">Shipment</p>
+                            </div>
+                            <div class="w-1/3 text-center pt-3.5">
+                                 <div class="h-0.5 bg-gray-300"></div>
+                            </div>
+                            <div class="w-1/3 text-center">
+                                <div class="step-indicator w-8 h-8 mx-auto rounded-full flex items-center justify-center text-white font-bold">2</div>
+                                <p class="text-sm mt-2 text-gray-500">Route</p>
+                            </div>
+                             <div class="w-1/3 text-center pt-3.5">
+                                 <div class="h-0.5 bg-gray-300"></div>
+                            </div>
+                            <div class="w-1/3 text-center">
+                                <div class="step-indicator w-8 h-8 mx-auto rounded-full flex items-center justify-center text-white font-bold">3</div>
+                                <p class="text-sm mt-2 text-gray-500">Contact</p>
+                            </div>
+                        </div>
+
+                        <form id="quoteForm" novalidate>
+                            <div id="step1" class="step-form active">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label for="freightType" class="block text-gray-700 font-medium mb-2">Freight Type</label>
+                                        <select id="freightType" name="freightType" class="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500" required>
+                                            <option value="">Select freight type...</option>
+                                            <option value="Sea Freight">Sea Freight</option>
+                                            <option value="Air Freight">Air Freight</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="serviceType" class="block text-gray-700 font-medium mb-2">Service Type</label>
+                                        <select id="serviceType" name="serviceType" class="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500" required>
+                                            <option value="">Select a service...</option>
+                                            <option value="Commercial Cargo">Commercial Cargo</option>
+                                            <option value="Vehicle">Vehicle Shipping (Sea Freight Only)</option>
+                                            <option value="Container">Container Shipping (Sea Freight Only)</option>
+                                            <option value="Box">Boxes &amp; Crates</option>
+                                        </select>
+                                    </div>
+                                    <div class="pt-4">
+                                        <button type="button" id="nextStep1" class="w-full btn-primary font-bold py-3 rounded-lg">Next</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="step2" class="step-form">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label for="origin" class="block text-gray-700 font-medium mb-2">Origin Country/City</label>
+                                        <input type="text" id="origin" name="origin" class="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="e.g., London, UK" required>
+                                    </div>
+                                    <div>
+                                        <label for="destination" class="block text-gray-700 font-medium mb-2">Destination Port (Caribbean)</label>
+                                        <input type="text" id="destination" name="destination" class="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="e.g., Kingston, Jamaica" required>
+                                    </div>
+                                    <div class="flex justify-between pt-4">
+                                        <button type="button" id="prevStep2" class="bg-gray-300 text-gray-700 font-bold py-3 px-6 rounded-lg hover:bg-gray-400">Back</button>
+                                        <button type="button" id="nextStep2" class="btn-primary font-bold py-3 px-6 rounded-lg">Next</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="step3" class="step-form">
+                                <div class="space-y-4">
+                                    <div class="grid sm:grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="name" class="block text-gray-700 font-medium mb-2">Full Name</label>
+                                            <input type="text" id="name" name="name" class="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500" required>
+                                        </div>
+                                        <div>
+                                            <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                                            <input type="email" id="email" name="email" class="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500" required>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="phone" class="block text-gray-700 font-medium mb-2">Phone Number</label>
+                                        <input type="tel" id="phone" name="phone" class="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500" required>
+                                    </div>
+                                    <div class="flex justify-between pt-4">
+                                        <button type="button" id="prevStep3" class="bg-gray-300 text-gray-700 font-bold py-3 px-6 rounded-lg hover:bg-gray-400">Back</button>
+                                        <button type="submit" class="btn-primary font-bold py-3 px-6 rounded-lg">Submit Request</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="quote-success-message" class="hidden text-center py-8">
+                        <div class="text-teal-500 text-6xl mb-4">✓</div>
+                        <h3 class="text-2xl font-bold text-gray-800">Thank You!</h3>
+                        <p class="text-gray-700 mt-2">Your quote request has been sent. Our team will review your details and get back to you with a quote shortly.</p>
+                        <div class="mt-8">
+                            <button id="generateEmailButton" class="btn-primary font-bold py-3 px-6 rounded-lg transition duration-300">
+                                ✨ Generate Email Summary ✨
+                            </button>
+                            <div id="emailLoadingSpinner" class="hidden mt-4 flex justify-center items-center">
+                                <div class="spinner"></div>
+                                <span class="ml-2 text-gray-600">Generating email...</span>
+                            </div>
+                            <div id="generatedEmailSection" class="hidden mt-6 bg-white p-4 rounded-lg shadow-inner text-left">
+                                <h4 class="text-lg font-bold mb-2 text-gray-800">Your Quote Summary Email Draft:</h4>
+                                <textarea id="generatedEmailContent" rows="10" class="w-full p-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-800" readonly></textarea>
+                                <button id="copyEmailButton" class="bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded-lg mt-4 hover:bg-gray-300">Copy to Clipboard</button>
+                                <span id="copyFeedback" class="ml-2 text-sm text-green-600 hidden">Copied!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="track" class="py-20 md:py-24 bg-stone-50">
+             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-2xl mx-auto text-center reveal-on-scroll">
+                    <h2 class="text-3xl font-bold text-gray-800">Track Your Shipment</h2>
+                    <p class="text-gray-600 mt-2 mb-8">Stay informed about your shipment's journey. Enter your tracking number below to get the latest status of your Sea or Air Freight shipment in real-time. This tool provides peace of mind and full visibility from origin to destination.</p>
+                    <form id="trackingForm" class="flex flex-col sm:flex-row items-center gap-2">
+                        <input type="text" id="trackingNumber" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-lg" placeholder="e.g., ACS123456789" required>
+                        <button type="submit" class="w-full sm:w-auto btn-primary font-bold py-3 px-8 rounded-lg transition duration-300 text-lg">Track</button>
+                    </form>
+                    <div id="trackingResult" class="mt-8 text-left bg-white p-6 rounded-lg shadow-inner hidden"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-20 md:py-24 bg-white">
+             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Our Story &amp; Commitment</h2>
+                    <p class="text-gray-600 mt-4 text-lg">Learn more about the people and principles behind Anglo-Carib Shipping. This section shares our mission and answers common questions, offering insight into our dedication to becoming the most trusted logistics partner for the Caribbean.</p>
+                </div>
+                <div class="grid lg:grid-cols-5 gap-12 items-start">
+                    <div class="lg:col-span-3 reveal-on-scroll">
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800">A New Standard in Caribbean Shipping</h3>
+                        <div class="space-y-4 text-gray-600">
+                            <p>Established in 2024, Anglo-Carib Shipping Limited was founded to create a more personal, reliable, and straightforward shipping experience for Sea and Air Freight between worldwide origins and the Caribbean. As a new, owner-operated micro-entity, building an excellent reputation is paramount to us. We are committed to transparency and an unwavering commitment to customer satisfaction.</p>
+                            <p>Our mission is simple: to be the most trusted shipping partner for the Caribbean diaspora and businesses needing Sea and Air Freight services from any global location to the Caribbean. We are proud to be the only UK shipping company offering a completely personalized end-to-end service. We understand the importance of every shipment and treat your goods as if they were our own.</p>
+                            <p class="font-semibold text-gray-800 mt-6 border-l-4 border-teal-500 pl-4">Stephen Paul Woodard, Director, brings over 30 years of experience in the shipping and marine cargo insurance industry, ensuring your consignments are handled with unparalleled expertise and care.</p>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-2 reveal-on-scroll" style="transition-delay: 150ms;">
+                         <div class="bg-stone-50 p-6 rounded-lg shadow-md">
+                            <h3 class="text-xl font-bold mb-4 text-gray-800">Frequently Asked Questions</h3>
+                            <div class="space-y-4 text-left">
+                                <div class="faq-item border-b border-gray-200 pb-4">
+                                    <button class="faq-question w-full flex justify-between items-center text-lg font-medium text-gray-800">
+                                        <span>What items are prohibited?</span>
+                                        <span class="transform transition-transform duration-300 text-teal-500 font-bold text-xl">+</span>
+                                    </button>
+                                    <div class="faq-answer hidden mt-2 text-gray-600">
+                                        <p>Commonly prohibited items include flammable liquids, explosives, narcotics, and certain perishable goods. Restrictions vary by origin, destination, and freight type. We will provide a detailed list relevant to your shipment upon booking.</p>
+                                    </div>
+                                </div>
+                                <div class="faq-item border-b border-gray-200 pb-4">
+                                    <button class="faq-question w-full flex justify-between items-center text-lg font-medium text-gray-800">
+                                        <span>Do you offer insurance?</span>
+                                        <span class="transform transition-transform duration-300 text-teal-500 font-bold text-xl">+</span>
+                                    </button>
+                                    <div class="faq-answer hidden mt-2 text-gray-600">
+                                        <p>Yes, we offer comprehensive shipping insurance options for both Sea and Air Freight for your peace of mind. We can discuss the best coverage for your specific shipment during the quotation process.</p>
+                                    </div>
+                                </div>
+                                <div class="faq-item">
+                                    <button class="faq-question w-full flex justify-between items-center text-lg font-medium text-gray-800">
+                                        <span>How long does shipping take?</span>
+                                        <span class="transform transition-transform duration-300 text-teal-500 font-bold text-xl">+</span>
+                                    </button>
+                                    <div class="faq-answer hidden mt-2 text-gray-600">
+                                        <p>Transit times vary by origin, destination, and service. Typically, ocean freight from the UK to the Caribbean is 2-4 weeks. Air Freight is much faster. We provide estimated transit times with every booking confirmation.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="bg-gray-800 text-gray-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid md:grid-cols-3 gap-8 mb-8 text-center md:text-left">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-white">Anglo-Carib Shipping Ltd</h3>
+                    <p class="text-gray-400">Your dedicated Sea &amp; Air Freight link from worldwide origins to the heart of the Caribbean.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-white">Contact Information</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><strong>Email:</strong> <a href="mailto:info@anglocaribshippingltd.com" class="hover:text-white">info@anglocaribshippingltd.com</a></li>
+                        <li><strong>Phone:</strong> <a href="tel:01708500235" class="hover:text-white">01708 500235</a></li>
+                        <li><strong>Registered Office:</strong><br>Suite G04 1 Quality Court, Chancery Lane, London, WC2A 1HR, United Kingdom</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-white">Legal</h3>
+                     <ul class="space-y-2">
+                        <li><button id="privacy-policy-button" class="text-gray-400 hover:text-white">Privacy Policy</button></li>
+                        <li><button id="terms-button" class="text-gray-400 hover:text-white">Terms &amp; Conditions</button></li>
+                        <li><button id="cookie-policy-button" class="text-gray-400 hover:text-white">Cookie Policy</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="bg-gray-900 py-6">
+             <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
+                <p>Anglo Carib Shipping Ltd | Registered in England and Wales | Company No: 15674691</p>
+                <p>© 2025 Anglo-Carib Shipping Ltd. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <div id="modal-container" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden items-center justify-center p-4">
+        <div id="modal-content" class="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-8 relative">
+            <button id="modal-close-button" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl">×</button>
+            <h2 id="modal-title" class="text-2xl font-bold mb-4 text-gray-800"></h2>
+            <div id="modal-body" class="text-gray-600 space-y-4"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile Menu
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            document.querySelectorAll('#mobile-menu a, header nav a').forEach(link => {
+                link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+            });
+
+            // Service Card Accordions
+            const serviceCards = document.querySelectorAll('.service-card');
+            serviceCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    card.querySelector('.service-details').classList.toggle('hidden');
+                });
+            });
+
+            // FAQ Accordions
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                const icon = question.querySelector('span:last-child');
+                question.addEventListener('click', () => {
+                    const isHidden = answer.classList.contains('hidden');
+                    faqItems.forEach(i => {
+                        i.querySelector('.faq-answer').classList.add('hidden');
+                        i.querySelector('.faq-question span:last-child').textContent = '+';
+                    });
+                    if (isHidden) {
+                        answer.classList.remove('hidden');
+                        icon.textContent = '−';
+                    }
+                });
+            });
+            
+            // Tracking Form
+            const trackingForm = document.getElementById('trackingForm');
+            const trackingResult = document.getElementById('trackingResult');
+            trackingForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const trackingNumber = document.getElementById('trackingNumber').value.trim().toUpperCase();
+                trackingResult.classList.remove('hidden');
+                if (!trackingNumber) {
+                    trackingResult.innerHTML = `<p class="text-red-500 font-bold">Please enter a valid tracking number.</p>`;
+                    return;
+                }
+                const statuses = {
+                    'ACS123456789': [{ status: 'Booking Confirmed', date: '2025-06-01', location: 'London, UK', type: 'Sea Freight' }, { status: 'Collected from Shipper', date: '2025-06-03', location: 'London, UK', type: 'Sea Freight' }, { status: 'Awaiting Shipment', date: '2025-06-05', location: 'London Gateway Port', type: 'Sea Freight' }],
+                    'ACS987654321': [{ status: 'Booking Confirmed', date: '2025-05-28', location: 'Manchester, UK', type: 'Sea Freight' }, { status: 'Departed from UK Port', date: '2025-06-02', location: 'London Gateway Port', type: 'Sea Freight' }, { status: 'Arrived at Destination Port', date: '2025-06-15', location: 'Kingston, Jamaica', type: 'Sea Freight' }, { status: 'Ready for Collection', date: '2025-06-17', location: 'Kingston, Jamaica', type: 'Sea Freight' }],
+                    'ACSAIR001': [{ status: 'Booking Confirmed', date: '2025-06-10', location: 'Shanghai, CN', type: 'Air Freight' }, { status: 'Departed Origin Airport', date: '2025-06-12', location: 'PVG Airport', type: 'Air Freight' }, { status: 'Arrived at Destination Airport', date: '2025-06-13', location: 'MBJ Airport, Montego Bay', type: 'Air Freight' }, { status: 'Ready for Collection', date: '2025-06-14', location: 'MBJ Airport, Montego Bay', type: 'Air Freight' }]
+                };
+                if (statuses[trackingNumber]) {
+                    let resultHTML = `<h3 class="text-xl font-bold mb-4 text-gray-800">Status for ${trackingNumber}</h3>`;
+                    resultHTML += '<ul class="space-y-4">';
+                    statuses[trackingNumber].slice().reverse().forEach((item, index) => {
+                        resultHTML += `<li class="flex items-start gap-4 ${index === 0 ? 'font-bold text-gray-800' : 'text-gray-600'}"><div class="mt-1 w-3 h-3 rounded-full ${index === 0 ? 'bg-teal-500' : 'bg-gray-300'}"></div><div><p>${item.status}</p><p class="text-xs text-gray-500 font-normal">${item.date} - ${item.location}</p></div></li>`;
+                    });
+                    resultHTML += '</ul>';
+                    trackingResult.innerHTML = resultHTML;
+                } else {
+                    trackingResult.innerHTML = `<p class="font-bold text-gray-800">No results found for ${trackingNumber}.</p><p class="text-sm text-gray-500 mt-2">Please check the number and try again.</p>`;
+                }
+            });
+
+            // Active Nav Link on Scroll
+            const header = document.getElementById('header');
+            const navLinks = document.querySelectorAll('header nav a');
+            const sections = document.querySelectorAll('main section');
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - header.offsetHeight - 40) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    const linkHref = link.getAttribute('href');
+                    if (linkHref && linkHref.includes('#') && linkHref.split('#')[1] === current) {
+                       link.classList.add('active');
+                    }
+                });
+            });
+
+            // Quote Form Logic
+            const quoteForm = document.getElementById('quoteForm');
+            const quoteFormContainer = document.getElementById('quote-form-container');
+            const successMessage = document.getElementById('quote-success-message');
+            const steps = document.querySelectorAll('.step-form');
+            const indicators = document.querySelectorAll('.step-indicator');
+            const indicatorText = document.querySelectorAll('.step-indicator ~ p');
+            let currentStep = 0;
+            let quoteFormData = {}; // Store form data here
+
+            function showStep(stepIndex) {
+                steps.forEach((step, index) => step.classList.toggle('active', index === stepIndex));
+                indicators.forEach((indicator, index) => indicator.classList.toggle('active', index === stepIndex));
+                indicatorText.forEach((p, index) => {
+                    p.classList.toggle('text-gray-700', index === stepIndex);
+                    p.classList.toggle('font-medium', index === stepIndex);
+                    p.classList.toggle('text-gray-500', index !== stepIndex);
+                });
+                currentStep = stepIndex;
+            }
+
+            function validateStep(stepIndex) {
+                const inputs = steps[stepIndex].querySelectorAll('[required]');
+                let isValid = true;
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        isValid = false;
+                        input.classList.add('border-red-500');
+                    } else {
+                        input.classList.remove('border-red-500');
+                        quoteFormData[input.name] = input.value.trim();
+                    }
+                });
+                return isValid;
+            }
+
+            document.getElementById('nextStep1').addEventListener('click', () => {
+                if (validateStep(0)) showStep(1);
+                else openModal("Incomplete Step", "Please fill out all fields before proceeding.");
+            });
+            document.getElementById('nextStep2').addEventListener('click', () => {
+                 if (validateStep(1)) showStep(2);
+                 else openModal("Incomplete Step", "Please fill out all fields before proceeding.");
+            });
+            document.getElementById('prevStep2').addEventListener('click', () => showStep(0));
+            document.getElementById('prevStep3').addEventListener('click', () => showStep(1));
+
+            quoteForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (validateStep(2)) {
+                    quoteFormContainer.classList.add('hidden');
+                    successMessage.classList.remove('hidden');
+                    document.getElementById('generatedEmailSection').classList.add('hidden');
+                    document.getElementById('generatedEmailContent').value = '';
+                    document.getElementById('copyFeedback').classList.add('hidden');
+                } else {
+                    openModal("Incomplete Step", "Please fill out your contact details to submit the request.");
+                }
+            });
+
+            // Modal Logic
+            const modalContainer = document.getElementById('modal-container');
+            const modalCloseButton = document.getElementById('modal-close-button');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+
+            function openModal(title, contentHTML) {
+                modalTitle.textContent = title;
+                modalBody.innerHTML = contentHTML;
+                modalContainer.classList.remove('hidden');
+                modalContainer.classList.add('flex');
+            }
+            const closeModal = () => modalContainer.classList.add('hidden');
+            modalCloseButton.addEventListener('click', closeModal);
+            modalContainer.addEventListener('click', e => {
+                if (e.target === modalContainer) closeModal();
+            });
+            
+            document.getElementById('privacy-policy-button').addEventListener('click', () => openModal("Privacy Policy", `<p>Our commitment is to protect your privacy. This policy details how we collect and use your data in compliance with UK GDPR.</p><h4 class="font-bold mt-4 text-gray-700">Information We Collect</h4><p>We collect personal information you provide via our forms, including name, email, phone number, and addresses.</p><h4 class="font-bold mt-4 text-gray-700">How We Use It</h4><p>Your data is used to provide quotes, manage shipments, and for internal record keeping.</p>`));
+            document.getElementById('terms-button').addEventListener('click', () => openModal("Terms & Conditions", `<p>These terms govern the use of our services.</p><h4 class="font-bold mt-4 text-gray-700">Services</h4><p>We agree to provide services as described in your quote. The customer must ensure goods are packed securely and comply with all laws.</p><h4 class="font-bold mt-4 text-gray-700">Liability</h4><p>Our liability is limited under standard shipping conventions. We strongly recommend purchasing additional insurance.</p>`));
+            document.getElementById('cookie-policy-button').addEventListener('click', () => openModal("Cookie Policy", `<p>This website uses cookies to enhance user experience by analyzing web traffic. We do not use cookies to collect personally identifiable information.</p>`));
+            
+            // Scroll Animations
+            const scrollElements = document.querySelectorAll(".reveal-on-scroll");
+            const elementInView = (el, dividend = 1) => {
+                const elementTop = el.getBoundingClientRect().top;
+                return (elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend);
+            };
+            const displayScrollElement = (element) => element.classList.add("is-visible");
+            const handleScrollAnimation = () => {
+                scrollElements.forEach((el) => {
+                    if (elementInView(el, 1.25)) {
+                        displayScrollElement(el);
+                    }
+                });
+            }
+            window.addEventListener("scroll", handleScrollAnimation);
+            handleScrollAnimation();
+
+            // Chart.js
+            const ctx = document.getElementById('marketComparisonChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Competitor C', 'Competitor B', 'Competitor A', 'Anglo-Carib Shipping Ltd'],
+                    datasets: [{
+                        label: 'Number of Key Features',
+                        data: [3, 5, 4, 7],
+                        backgroundColor: ['#e7e5e4', '#d6d3d1', '#a8a29e', '#0d9488'],
+                        borderColor: '#FFFFFF',
+                        borderWidth: 2,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#262626',
+                            titleFont: { size: 16 },
+                            bodyFont: { size: 14 },
+                            padding: 15,
+                            cornerRadius: 4,
+                            callbacks: {
+                                label: (context) => {
+                                    let features = ['Online Quote', 'Online Tracking', 'Personalized Service', 'Customs Assistance', 'Door-to-Door Delivery', 'Multiple Freight Types', 'Dedicated Support'];
+                                    if (context.raw < 7) {
+                                        return ` Offers ${context.raw} of 7 key features.`;
+                                    }
+                                    return features.map(f => ` ✓ ${f}`);
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Number of Features Offered', color: '#57534e' },
+                            grid: { drawOnChartArea: false }
+                        },
+                        y: {
+                            grid: { color: '#e7e5e4' },
+                            ticks: { font: { size: 14 } }
+                        }
+                    }
+                }
+            });
+
+            // LLM Integration for Email Summary
+            const generateEmailButton = document.getElementById('generateEmailButton');
+            const emailLoadingSpinner = document.getElementById('emailLoadingSpinner');
+            const generatedEmailSection = document.getElementById('generatedEmailSection');
+            const generatedEmailContent = document.getElementById('generatedEmailContent');
+            const copyEmailButton = document.getElementById('copyEmailButton');
+            const copyFeedback = document.getElementById('copyFeedback');
+
+            generateEmailButton.addEventListener('click', async () => {
+                emailLoadingSpinner.classList.remove('hidden');
+                generatedEmailSection.classList.add('hidden');
+                generateEmailButton.disabled = true;
+
+                const { freightType, serviceType, origin, destination, name, email, phone } = quoteFormData;
+
+                const prompt = `Draft a concise email summary for a shipping quote request.
+                The customer's name is ${name}.
+                Their email is ${email}.
+                Their phone is ${phone}.
+                They are requesting a quote for ${freightType} service of type ${serviceType}.
+                The origin of the shipment is ${origin}.
+                The destination is ${destination}.
+                The email should be professional, friendly, and confirm receipt of their request, stating that a team member will follow up shortly with a detailed quote. Do not include a subject line.
+                Start the email with "Dear ${name},".`;
+
+                try {
+                    // --- DOCUMENTATION: Gemini API Key ---
+                    // To enable this feature, you must get an API key from Google AI Studio
+                    // and insert it here.
+                    const apiKey = "YOUR_GOOGLE_AI_API_KEY_HERE";
+                    
+                    if (apiKey === "YOUR_GOOGLE_AI_API_KEY_HERE") {
+                         throw new Error("API key not provided.");
+                    }
+
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                    });
+                    
+                    if (!response.ok) {
+                        const errorBody = await response.json();
+                        throw new Error(`API Error: ${errorBody.error.message}`);
+                    }
+
+                    const result = await response.json();
+                    const generatedText = result.candidates[0].content.parts[0].text;
+                    generatedEmailContent.value = generatedText;
+
+                } catch (error) {
+                    console.error("Error calling AI API:", error);
+                    const errorMessage = error.message.includes("API key not provided") 
+                        ? "This feature is not yet activated. An API key is required."
+                        : `An error occurred: ${error.message}`;
+                    generatedEmailContent.value = `Could not generate email. ${errorMessage}`;
+                    openModal("Generation Error", errorMessage);
+                } finally {
+                    generatedEmailSection.classList.remove('hidden');
+                    emailLoadingSpinner.classList.add('hidden');
+                    generateEmailButton.disabled = false;
+                }
+            });
+
+            copyEmailButton.addEventListener('click', () => {
+                generatedEmailContent.select();
+                navigator.clipboard.writeText(generatedEmailContent.value).then(() => {
+                    copyFeedback.classList.remove('hidden');
+                    setTimeout(() => {
+                        copyFeedback.classList.add('hidden');
+                    }, 2000);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
